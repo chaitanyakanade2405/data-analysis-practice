@@ -50,3 +50,22 @@ select * from orders_data as od
 inner join returns_data as rd
 on od.order_id = rd.order_id
 where return_reason = 'Wrong Items' and city = 'Los Angeles';
+
+select * ,
+CASE when profit < 0 then 'loss'
+when profit between 50 and 99 then 'high profit'
+when profit between 0 and 49 then 'low profit'
+else 'very high profit'
+end as  profit_bucket
+from orders_data;
+
+select *, length(customer_name) as cust_length,
+left(order_id,2) as left_value
+from orders_data;
+
+SELECT order_id,order_date,
+    DATE_FORMAT(order_date, '%M') AS order_month,
+    year(order_date) as order_year,
+    month(order_date) as order_month_num,
+    datediff(ship_date, order_date) as lead_days
+FROM orders_data;
